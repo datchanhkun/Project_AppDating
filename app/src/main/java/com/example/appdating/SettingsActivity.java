@@ -58,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private FirebaseStorage storage;
     private StorageReference storageReference;
-    public Uri imageUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +88,9 @@ public class SettingsActivity extends AppCompatActivity {
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent,1);
             }
         });
@@ -104,8 +104,6 @@ public class SettingsActivity extends AppCompatActivity {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                startActivity(intent);
                 finish();
                 return;
             }
@@ -127,8 +125,8 @@ public class SettingsActivity extends AppCompatActivity {
                         phone = map.get("phone").toString();
                         mPhoneField.setText(phone);
                     }
-                    if(map.get("profileImages") != null) {
-                        profileImageUrl = map.get("profileImages").toString();
+                    if(map.get("profileImageUrl") != null) {
+                        profileImageUrl = map.get("profileImageUrl").toString();
                         Glide.with(getApplication()).load(profileImageUrl).into(mProfileImage);
                     }
                 }
@@ -153,29 +151,21 @@ public class SettingsActivity extends AppCompatActivity {
             Bitmap bitmap = null;
 
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri);
+                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(),resultUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
-            byte[] imageBytes = baos.toByteArray();
-            String fileName = UUID.randomUUID().toString();
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-            StorageReference images = storageReference.child("profileImages");
-            StorageReference imageRef = images.child(fileName + ".jpeg");
-            UploadTask uploadTask = imageRef.putBytes(imageBytes);
+            byte[] data = baos.toByteArray();
+            UploadTask uploadTask = filePath.putBytes(data);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     finish();
                 }
             });
-            //Đoạn này là đoạn t fix, m coi trong code nó tới phần OnSuccess này nè
-
-
-
             uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -185,6 +175,7 @@ public class SettingsActivity extends AppCompatActivity {
                             Map newImage = new HashMap();
                             newImage.put("profileImageUrl", uri.toString());
                             mCustomerDatabase.updateChildren(newImage);
+
                             finish();
                             return;
                         }
@@ -197,25 +188,6 @@ public class SettingsActivity extends AppCompatActivity {
                     });
                 }
             });
-//            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    //Uri url = taskSnapshot.getDownloadUrl();
-//                    Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-//                    while(!uri.isComplete());
-//                    Uri url = uri.getResult();
-//
-//                    Toast.makeText(SettingsActivity.this, "Upload Success, download URL " +
-//                            url.toString(), Toast.LENGTH_LONG).show();
-//                    Log.i("FBApp1 URL ", url.toString());
-//                    Map userInfo = new HashMap();
-//                    userInfo.put("profileImages", url.toString());
-//                    mCustomerDatabase.updateChildren(userInfo);
-//                    finish();
-//                    return;
-//                }
-//            });
-
         } else {
             finish();
         }
@@ -226,8 +198,8 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && requestCode == Activity.RESULT_OK && data.getData() != null) {
-            imageUri = data.getData();
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            Uri imageUri = data.getData();
             resultUri = imageUri;
             mProfileImage.setImageURI(resultUri);
         }
