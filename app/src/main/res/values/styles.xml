@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    
+    <style name="RadioButtonStyle" parent="Theme.AppCompat.Light">
+        <!-- Màu của radio button       -->
+        <item name="colorAccent">#F44336</item>
+        <!--  màu mặc định của radio      -->
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+    </style>
+
+</resources>
