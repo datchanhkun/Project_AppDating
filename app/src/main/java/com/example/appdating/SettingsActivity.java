@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -43,8 +45,11 @@ import java.util.UUID;
 
 public class SettingsActivity extends AppCompatActivity {
     private EditText mNameField, mPhoneField;
+    private TextView mEmailField;
 
     private Button mBack, mConfirm;
+
+    private RadioButton radioButtonFeMale, radioButtonMale;
 
     private ImageView mProfileImage;
 
@@ -52,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mUserDatabase;
 
-    private String userId, name, phone, profileImageUrl, userSex;
+    private String userId, name, phone, profileImageUrl, userSex, email;
 
     private Uri resultUri;
 
@@ -68,10 +73,21 @@ public class SettingsActivity extends AppCompatActivity {
         //Get ID from field
         mNameField = (EditText) findViewById(R.id.name);
         mPhoneField = (EditText) findViewById(R.id.phone);
+        mEmailField = (TextView) findViewById(R.id.txtEmail);
+
+        radioButtonFeMale = (RadioButton) findViewById(R.id.radioFeMale);
+        radioButtonMale = (RadioButton) findViewById(R.id.radioMale);
 
         mProfileImage = (ImageView) findViewById(R.id.profileImage);
 
-        mBack = (Button) findViewById(R.id.back);
+        mBack = (Button) findViewById(R.id.Back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                return;
+            }
+        });
         mConfirm = (Button) findViewById(R.id.confirm);
 
         mAuth = FirebaseAuth.getInstance();
@@ -84,6 +100,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         //Lấy thông tin của user
         getUserInfo();
+
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +110,8 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
+
+
         //Lưu thông tin đã lấy được vào cơ sở dữ liệu
         mConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,13 +119,7 @@ public class SettingsActivity extends AppCompatActivity {
                 saveUserInformation();
             }
         });
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                return;
-            }
-        });
+
     }
 
     private void getUserInfo() {
@@ -124,6 +137,10 @@ public class SettingsActivity extends AppCompatActivity {
                         phone = map.get("phone").toString();
                         mPhoneField.setText(phone);
                     }
+                    if(map.get("email") != null) {
+                        email = map.get("email").toString();
+                        mEmailField.setText(email);
+                    }
                     if(map.get("sex") != null) {
                         userSex = map.get("sex").toString();
                     }
@@ -132,7 +149,7 @@ public class SettingsActivity extends AppCompatActivity {
                         profileImageUrl = map.get("profileImageUrl").toString();
                         switch (profileImageUrl){
                             case "default":
-                                Glide.with(getApplication()).load(R.mipmap.ic_launcher).into(mProfileImage);
+                                Glide.with(getApplication()).load(R.drawable.logo).into(mProfileImage);
                                 break;
                             default:
                                 Glide.with(getApplication()).load(profileImageUrl).into(mProfileImage);
@@ -156,6 +173,7 @@ public class SettingsActivity extends AppCompatActivity {
         Map userInfo = new HashMap();
         userInfo.put("name", name);
         userInfo.put("phone", phone);
+
         mUserDatabase.updateChildren(userInfo);
         if(resultUri != null) {
             final StorageReference filePath = FirebaseStorage.getInstance().getReference().child("profileImages").child(userId);

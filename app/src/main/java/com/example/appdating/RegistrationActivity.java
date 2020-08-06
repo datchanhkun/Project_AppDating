@@ -35,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button mRegister;
     private EditText mEmail, mPassword, mName;
     private RadioGroup mRadioGroup;
+    private RadioButton mRadioFeMale, mRadioMale;
     private ProgressBar progressBar;
     private TextView mForgetPassword, mLogin;
 
@@ -65,6 +66,9 @@ public class RegistrationActivity extends AppCompatActivity {
         mName = findViewById(R.id.edtName);
         mPassword = findViewById(R.id.edtPassword);
         mRadioGroup = findViewById(R.id.radGroup);
+        mRadioFeMale = (RadioButton) findViewById(R.id.radioFeMale);
+        mRadioMale = (RadioButton) findViewById(R.id.radioMale);
+
         progressBar = findViewById(R.id.progressBar);
         mLogin = (TextView) findViewById(R.id.txtLogin);
         mForgetPassword = (TextView) findViewById(R.id.txtForgetPass);
@@ -83,7 +87,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
                 //nếu không chọn
-                if(radioButton.getText() == null) {
+                if(mRadioMale.isChecked() == false && mRadioFeMale.isChecked() == false){
+                    mName.setError("Chọn giới tính");
                     return;
                 }
                 //nếu rỗng
@@ -111,6 +116,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
                             Map userInfo = new HashMap<>();
                             userInfo.put("name", name);
+                            userInfo.put("email", email);
                             userInfo.put("sex", radioButton.getText().toString());
                             userInfo.put("profileImageUrl", "default");
 

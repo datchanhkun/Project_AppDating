@@ -123,8 +123,12 @@ public class MainActivity extends AppCompatActivity {
                     //khi 2 người match nhau
                     Toast.makeText(MainActivity.this, "Kết nối mới", Toast.LENGTH_SHORT).show();
                     //saving matches to database
+                    String key = FirebaseDatabase.getInstance().getReference().child("Chat").push().getKey();
                     userDb.child(snapshot.getKey()).child("connections").child("matchs").child(currentUId).setValue(true);
+                    userDb.child(snapshot.getKey()).child("connections").child("matchs").child(currentUId).child("ChatId").setValue(key);
+
                     userDb.child(currentUId).child("connections").child("matchs").child(snapshot.getKey()).setValue(true);
+                    userDb.child(currentUId).child("connections").child("matchs").child(snapshot.getKey()).child("ChatId").setValue(key);
                 }
             }
 

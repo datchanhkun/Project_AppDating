@@ -7,38 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints,OnClick"
-            android:text="Logout"
-            android:onClick="logoutUser"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:ignore="MissingConstraints,OnClick"
-            android:text="Matches"
-            android:onClick="goToMatches"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints,OnClick"
-            android:text="Settings"
-            android:onClick="goToSettings"
-            android:layout_weight="1"/>
-    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/menu_design"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+            <Button
+                style="@style/ButtonActionStyle_Main"
+                android:layout_gravity="left"
+                tools:ignore="MissingConstraints,OnClick"
+                android:background="@drawable/ic_outline_settings_applications_24"
+                android:onClick="goToSettings"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+            <Button
+                style="@style/ButtonActionStyle_Main"
+                android:layout_gravity="center"
+                tools:ignore="MissingConstraints,OnClick"
+                android:background="@drawable/ic_baseline_message_24"
+                android:onClick="goToMatches"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+            <Button
+                style="@style/ButtonActionStyle_Main"
+                android:gravity="right"
+                tools:ignore="MissingConstraints,OnClick"
+                android:background="@drawable/ic_outline_logout_24"
+                android:onClick="logoutUser" />
+        </LinearLayout>
+
+    </LinearLayout>
     
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
         android:id="@+id/frame"

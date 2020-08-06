@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="20sp">
-    <ImageView
-        android:layout_width="75sp"
-        android:layout_height="75sp"
-        android:src="@mipmap/ic_launcher"/>
-    <TextView
-        android:layout_width="match_parent"
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_avatar_default_24"
+            android:id="@+id/MatchImage"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:paddingLeft="20sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Matche's ID"
+        android:orientation="vertical"
         android:layout_gravity="center"
-        android:id="@+id/MatchID"/>
+        >
+        <TextView
+            android:paddingBottom="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Match's Name"
+            android:layout_gravity="center"
+            android:id="@+id/MatchName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Match's ID"
+            android:layout_gravity="center"
+            android:id="@+id/MatchID"/>
+    </LinearLayout>
+
+
 </LinearLayout>
