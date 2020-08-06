@@ -25,7 +25,10 @@ public class MatchesActivity extends AppCompatActivity {
     private RecyclerView.Adapter mMatchesAdapter;
     private RecyclerView.LayoutManager mMatchesLayoutManager;
     private String cusrrentUserID;
+<<<<<<< HEAD
     private Button mBack;
+=======
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class MatchesActivity extends AppCompatActivity {
 //        resultsMatches.add(obj);
 //        resultsMatches.add(obj);
 
+<<<<<<< HEAD
         mBack = (Button) findViewById(R.id.Back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +60,8 @@ public class MatchesActivity extends AppCompatActivity {
                 return;
             }
         });
+=======
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
         mMatchesAdapter.notifyDataSetChanged();
     }
 

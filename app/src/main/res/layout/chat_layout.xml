@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Chat.ChatActivity">
 
+<<<<<<< HEAD
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,6 +70,12 @@
         android:layout_above="@+id/sendLayout"
         android:layout_marginBottom="340dp">
 
+=======
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sendLayout">
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -87,7 +94,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
+<<<<<<< HEAD
             android:hint="Nhập tin nhắn..."
+=======
+            android:hint="message....."
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
             android:id="@+id/edtMessage"
             />
 
@@ -95,7 +106,12 @@
             android:id="@+id/btnSend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_weight="0.1"
             android:drawableLeft="@drawable/ic_baseline_send_24" />
+=======
+            android:layout_weight="0.2"
+            android:text="Send" />
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
     </LinearLayout>
 </RelativeLayout>

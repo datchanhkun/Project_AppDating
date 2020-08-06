@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="20sp">
+<<<<<<< HEAD
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="30dp"
@@ -20,6 +21,14 @@
             />
     </androidx.cardview.widget.CardView>
 
+=======
+    <ImageView
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/MatchImage"
+        />
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
     <LinearLayout
         android:paddingLeft="20sp"
         android:layout_width="wrap_content"

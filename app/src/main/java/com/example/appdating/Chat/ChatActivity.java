@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< HEAD
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,9 @@ import com.bumptech.glide.Glide;
 import com.example.appdating.Matches.MatchesActivity;
 import com.example.appdating.Matches.MatchesAdapter;
 import com.example.appdating.Matches.MatchesObject;
+=======
+
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
 import com.example.appdating.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -33,6 +37,7 @@ import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
+<<<<<<< HEAD
     private RecyclerView.Adapter mChatAdapter, mMatchesAdapter;
 
     private RecyclerView.LayoutManager mChatLayoutManager, mMatchesLayoutManager;
@@ -43,6 +48,13 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView userImage;
     private TextView userName;
 
+=======
+    private RecyclerView.Adapter mChatAdapter;
+    private RecyclerView.LayoutManager mChatLayoutManager;
+    private String currentUserID, matchId, chatId;
+    private EditText mSendEditText;
+    private Button mSendButton;
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
 
     DatabaseReference mDatabaseUser, mDatabaseChat;
 
@@ -61,7 +73,11 @@ public class ChatActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
+<<<<<<< HEAD
         mRecyclerView.setHasFixedSize(false);
+=======
+            mRecyclerView.setHasFixedSize(false);
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
 
         mChatLayoutManager = new LinearLayoutManager(ChatActivity.this);
         mRecyclerView.setLayoutManager(mChatLayoutManager);
@@ -70,6 +86,7 @@ public class ChatActivity extends AppCompatActivity {
 
         mSendEditText = (EditText) findViewById(R.id.edtMessage);
         mSendButton = (Button) findViewById(R.id.btnSend);
+<<<<<<< HEAD
 
         userImage = (ImageView) findViewById(R.id.userImage);
         userName = (TextView) findViewById(R.id.userName);
@@ -88,6 +105,8 @@ public class ChatActivity extends AppCompatActivity {
                 return;
             }
         });
+=======
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +115,7 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
     private void getUserMatchId() {
         DatabaseReference matchDb = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("connections").child("matchs");
         matchDb.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -147,6 +167,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
+=======
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
     private void sendMessage() {
         String sendMessageText = mSendEditText.getText().toString();
         if (!sendMessageText.isEmpty()) {
@@ -161,7 +183,10 @@ public class ChatActivity extends AppCompatActivity {
         mSendEditText.setText(null);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
     private void getChatId() {
         mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -185,8 +210,13 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if (snapshot.exists()) {
+<<<<<<< HEAD
                     String message = null;
                     String createByUser = null;
+=======
+                    String message = "";
+                    String createByUser = "";
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
                     if (snapshot.child("text").getValue() != null) {
                         message = snapshot.child("text").getValue().toString();
                     }
@@ -222,11 +252,14 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD
     private ArrayList<MatchesObject> resultsMatches = new ArrayList<MatchesObject>();
 
     private List<MatchesObject> getDataSetMatches() {
         return resultsMatches;
     }
+=======
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
 
     private ArrayList<ChatObject> resultsChat = new ArrayList<ChatObject>();
 

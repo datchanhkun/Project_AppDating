@@ -11,6 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -30,6 +31,10 @@
     </LinearLayout>
 
     <LinearLayout
+=======
+        android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

@@ -208,7 +208,10 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
                     Map userInfo = new HashMap<>();
                     userInfo.put("name", user.getDisplayName());
+<<<<<<< HEAD
                     userInfo.put("email", user.getEmail());
+=======
+>>>>>>> a2f2c5d02e5e3428c3b49aa39780e0d9f373a939
                     userInfo.put("sex", "Male");
                     userInfo.put("profileImageUrl", user.getPhotoUrl().toString());
 
