@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppDating</string>
+    <string name="facebook_app_id">788076725334641</string>
+    <string name="fb_login_protocol_scheme">fb788076725334641</string>
 </resources>
